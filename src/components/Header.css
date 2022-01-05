@@ -1,0 +1,52 @@
+.header {
+    padding: 17px 228px;
+    display: flex;
+    align-items: center;
+    font-family: 'Nunito', sans-serif;
+}
+
+.search {
+    position: relative;
+    margin: 0 0 0 88px;
+}
+
+.search__icon {
+    position: absolute;
+    z-index: 1;
+    top: 12px;
+    left: 16px;
+}
+
+.search__input {
+    width: 284px;
+    height: 40px;
+    background-color: #F7F7F7;
+    border-radius: 10px;
+}
+
+.create-btn {
+    padding: 8px 28px;
+    margin: 0 92px 0 35px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-yellow);
+    background-color: transparent;
+    border: 2px solid var(--primary-yellow);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.user {
+    font-size: 16px;
+}
+
+.user::before {
+    content: '';
+    background-image: url('../assets/icons/person.png');
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    margin: 0 7px 0 0;
+    vertical-align: middle;
+}
