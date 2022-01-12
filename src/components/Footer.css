@@ -1,0 +1,19 @@
+.footer {
+    display: flex;
+    align-items: center;
+    padding: 32px 10%;
+    margin-top: auto;
+    font-family: 'Nunito', sans-serif;
+    background-color: #181818;
+    color: #F7F7F7;
+}
+
+.email-address {
+    margin: 0 108px 0 130px;
+    color: var(--primary-yellow);
+    text-decoration: none;
+}
+
+.company-name {
+    margin: 0 0 0 16px;
+}
