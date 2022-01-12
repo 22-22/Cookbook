@@ -1,22 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import signUp from '../assets/signup.png';
-import './SignUpPage.css';
+import './SignPages.css';
 import Logo from '../components/common/Logo';
 import SignUpForm from '../components/SignUpForm';
 
 function SignUpPage() {
     return (
-        <div className="signup-page">
-            <img className="signup-image" src={signUp} alt="cereals" />
-            <section className="signup-form-container">
+        <main className="sign-page">
+            <img className="sign-image" src={signUp} alt="cereals" />
+            <section className="sign-form-container">
                 <Logo />
-                <h1 className="signup-title">Join Our Community</h1>
-                <span className="signup-text">Already have an account? </span>
-                <Link className="signup-link" to="/signin">Sign In</ Link>
+                <h1 className="sign-title">Join Our Community</h1>
+                <span className="sign-text">Already have an account? </span>
+                <Link className="sign-link" to="/signin">Sign In</ Link>
                 <SignUpForm />
             </section>
-        </div>
+        </main>
     )
 }
 

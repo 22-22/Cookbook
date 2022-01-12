@@ -3,7 +3,7 @@ import { Formik, Field, Form, FormikHelpers } from 'formik';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate, Link } from "react-router-dom";
 import hiddenInput from '../assets/icons/hidden-input.png';
-import './SignUpForm.css';
+import './SignForms.css';
 
 interface Values {
     email: string;
@@ -34,7 +34,6 @@ function SignUpForm() {
         if (password) {
             const passwordIsSame = checkIfSamePassword(password, confirmedPassword);
             if (passwordIsSame) {
-                setSubmitting(false);
                 createUserWithEmailAndPassword(auth, email, password)
                     .then((response) => {
                         navigate("/");
@@ -44,6 +43,7 @@ function SignUpForm() {
                         const errorCode = error.code;
                         setErrorInfo(`Error: ${errorCode}. Please try again.`);
                     });
+                setSubmitting(false);
             }
         } else {
             setErrorInfo("Please enter your password");
@@ -59,26 +59,26 @@ function SignUpForm() {
                 confirmedPassword: '',
             }}
                 onSubmit={handleSubmit}>
-                <Form className="signup-form">
-                    <label className="signup-form__label" htmlFor="email">Email</label>
-                    <Field className="signup-form__input" id="email" name="email"></Field>
-                    <div className="signup-form__label-block">
-                        <label className="signup-form__label" htmlFor="password">Password</label>
-                        <Link className="signup-form__link" to="">Forgot Password?</Link>
+                <Form className="sign-form">
+                    <label className="sign-form__label" htmlFor="email">Email</label>
+                    <Field className="sign-form__input" id="email" name="email" />
+                    <div className="sign-form__label-block">
+                        <label className="sign-form__label" htmlFor="password">Password</label>
+                        <Link className="sign-form__link" to="">Forgot Password?</Link>
                     </div>
-                    <div className="signup-form__input-block">
-                        <Field className="signup-form__input" id="password" name="password"></Field>
-                        <img className="signup-form__icon" src={hiddenInput} alt="hidden" />
+                    <div className="sign-form__input-block">
+                        <Field className="sign-form__input" id="password" name="password" />
+                        <img className="sign-form__icon" src={hiddenInput} alt="hidden" />
                     </div>
-                    <label className="signup-form__label" htmlFor="confirmedPassword">Confirm Password</label>
-                    <div className="signup-form__input-block">
-                        <Field className="signup-form__input" id="confirmedPassword" name="confirmedPassword"></Field>
-                        <img className="signup-form__icon" src={hiddenInput} alt="hidden" />
+                    <label className="sign-form__label" htmlFor="confirmedPassword">Confirm Password</label>
+                    <div className="sign-form__input-block">
+                        <Field className="sign-form__input" id="confirmedPassword" name="confirmedPassword" />
+                        <img className="sign-form__icon" src={hiddenInput} alt="hidden" />
                     </div>
-                    <button className="signup-form__btn" type="submit">Sign Up</button>
+                    <button className="sign-form__btn" type="submit">Sign Up</button>
                 </Form>
             </Formik>
-            <div className="signup-form__error-info">
+            <div className="sign-form__error-info">
                 {errorInfo}
             </div>
         </>
