@@ -1,0 +1,40 @@
+.signup-page {
+    display: flex;
+}
+
+.signup-image {
+    max-height: 100vh;
+    width: 60vw;
+    padding: 32px;
+}
+
+.signup-title {
+    margin: 48px 0 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.signup-text {
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-main);
+}
+
+.signup-link {
+    color: var(--primary-yellow);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.signup-form-container {
+    margin: calc((100vh - 767px) / 2) 0 calc((100vh - 767px) / 2) -10%;
+    padding: 72px 56px;
+    width: 600px;
+    height: 767px;
+    background: #FFFFFF;
+    box-shadow: var(--shadow-main);
+    border-radius: 10px 0 10px 0;
+}

@@ -10,9 +10,13 @@ body {
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
   --primary-yellow: #FFBC01;
+  --text-main: #181818;
+  --text-secondary: #494949;
+  --shadow-main: 0px 0px 16px rgba(0, 0, 0, 0.08);
 }
 

@@ -1,14 +1,13 @@
 import React from 'react';
 import './Header.css';
 import '../App.css';
-import logo from '../assets/logo.png';
 import searchIcon from '../assets/icons/search.png';
+import Logo from './common/Logo';
 
 function Header() {
     return (
         <header className="header">
-            <img src={logo} alt="logo" />
-            <h1 className="logo">Feed<span className="logo--colored">me</span></h1>
+            <Logo />
             <nav className="navigation">
                 <ul>
                     <li>Recepies</li>
@@ -17,7 +16,7 @@ function Header() {
             </nav>
             <div className="search">
                 <img className="search__icon" src={searchIcon} alt="search-icon" />
-                <input className="input search__input" type="text" name="searchInput"/>
+                <input className="search__input" type="text" name="searchInput"/>
             </div>
             <button className="create-btn">Create CookBook</button>
             <div className="user">John Doe</div>
