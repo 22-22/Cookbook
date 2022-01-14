@@ -9,7 +9,7 @@ function SignUpPage() {
     return (
         <main className="sign-page">
             <img className="sign-image" src={signUp} alt="cereals" />
-            <section className="sign-form-container">
+            <section className="sign-form-container sign-up-form-container">
                 <Logo />
                 <h1 className="sign-title">Join Our Community</h1>
                 <span className="sign-text">Already have an account? </span>

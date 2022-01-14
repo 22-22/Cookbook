@@ -8,6 +8,10 @@
     padding: 32px;
 }
 
+.sign-in-image {
+    margin: 0 0 0 -10%;
+}
+
 .sign-title {
     margin: 48px 0 8px;
     font-family: 'Montserrat', sans-serif;
@@ -30,11 +34,19 @@
 }
 
 .sign-form-container {
-    margin: calc((100vh - 767px) / 2) 0 calc((100vh - 767px) / 2) -10%;
     padding: 72px 56px;
     width: 600px;
     height: 767px;
     background: #FFFFFF;
     box-shadow: var(--shadow-main);
     border-radius: 10px 0 10px 0;
+}
+
+.sign-up-form-container {
+    margin: calc((100vh - 767px) / 2) 0 calc((100vh - 767px) / 2) -10%;
+}
+
+.sign-in-form-container {
+    margin: calc((100vh - 767px) / 2) 0 calc((100vh - 767px) / 2) 228px;
+    z-index: 2;
 }

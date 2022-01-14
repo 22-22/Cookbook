@@ -1,36 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { signInUser } from '../redux/actionCreators';
 import hiddenInput from '../assets/icons/hidden-input.png';
 import './SignForms.css';
-
 interface SignInValues {
     email: "",
     password: "",
 }
 
 export const SignInForm = () => {
-    const auth = getAuth();
-    const navigate = useNavigate();
-    const [errorInfo, setErrorInfo] = useState("");
+    const dispatch = useDispatch();
+    // const errorInfo = useSelector((state: RootStateOrAny) => state.errorInfo)
 
-    const handleSignInSubmit = (
+    const handleSignInSubmit = async (
         values: SignInValues,
         { setSubmitting }: FormikHelpers<SignInValues>
     ) => {
         const { email, password } = values;
-        signInWithEmailAndPassword(auth, email, password)
-            .then((response) => {
-                console.log(response);
-                navigate("/");
-                setErrorInfo("");
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                setErrorInfo(`Error: ${errorCode}. Please try again.`);
-            })
-        console.log(values);
+        dispatch(signInUser({ email, password }));
         setSubmitting(false);
     }
     return (
@@ -55,9 +44,10 @@ export const SignInForm = () => {
                     <button className="sign-form__btn" type="submit">Sign In</button>
                 </Form>
             </Formik>
+            {/* {errorInfo &&
             <div className="sign-form__error-info">
                 {errorInfo}
-            </div>
+            </div>} */}
         </>
     )
 }
