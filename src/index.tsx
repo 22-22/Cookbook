@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
+import { initializeApp } from 'firebase/app';
+import App from './App';
 import { store } from './redux/store';
+import { firebaseConfig } from './auth/firebase-config';
+import './index.css';
+
+initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>

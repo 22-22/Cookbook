@@ -8,3 +8,13 @@ export const signInUser = (payload: {
         payload
     }
 }
+
+export const signUpUser = (payload: {
+    email: string, password: string
+}) => {
+    return {
+        type: actionTypes.SIGN_UP_USER,
+        payload
+    }
+}
+

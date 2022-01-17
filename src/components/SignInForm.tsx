@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { signInUser } from '../redux/actionCreators';
 import hiddenInput from '../assets/icons/hidden-input.png';
+import { SignInValues } from '../tsTypes';
 import './SignForms.css';
-interface SignInValues {
-    email: "",
-    password: "",
-}
 
 export const SignInForm = () => {
     const dispatch = useDispatch();
-    // const errorInfo = useSelector((state: RootStateOrAny) => state.errorInfo)
+    const navigate = useNavigate();
+    const errorInfo = useSelector((state: RootStateOrAny) => state.errorInfo);
+    const auth = useSelector((state: RootStateOrAny) => state.isAuthenticated);
+
+    useEffect(() => {
+        if (auth) {
+            navigate("/");
+        }
+
+    }, [auth]);
 
     const handleSignInSubmit = async (
         values: SignInValues,
@@ -44,10 +50,11 @@ export const SignInForm = () => {
                     <button className="sign-form__btn" type="submit">Sign In</button>
                 </Form>
             </Formik>
-            {/* {errorInfo &&
-            <div className="sign-form__error-info">
-                {errorInfo}
-            </div>} */}
+            {errorInfo &&
+                <div className="sign-form__error-info">
+                    Error: {errorInfo}. Please try again.
+                </div>
+            }
         </>
     )
 }

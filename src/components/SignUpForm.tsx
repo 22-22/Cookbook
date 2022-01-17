@@ -1,52 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate, Link } from "react-router-dom";
 import hiddenInput from '../assets/icons/hidden-input.png';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { signUpUser } from '../redux/actionCreators';
+import { SignUpValues } from '../tsTypes';
 import './SignForms.css';
 
-interface Values {
-    email: string;
-    password: string;
-    confirmedPassword: string;
-}
+const errTryAgain = "Please try again.";
+const errDiffPasswords = `Error: Passwords differ. ${errTryAgain}`;
+const errNoPassword = "Please enter your password.";
 
 function SignUpForm() {
-    const auth = getAuth();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [errorInfo, setErrorInfo] = useState("");
+    const auth = useSelector((state: RootStateOrAny) => state.isAuthenticated);
+    const errorFromFirebase = useSelector((state: RootStateOrAny) => state.errorInfo);
+
+    useEffect(() => {
+        if (auth) {
+            navigate("/");
+        }
+    }, [auth]);
+
+    useEffect(() => {
+        if (errorFromFirebase) {
+            setErrorInfo( `Error: ${errorFromFirebase}. ${errTryAgain}`);
+        }
+    }, [errorFromFirebase]);
 
     const checkIfSamePassword = (password: string, confirmedPassword: string): Boolean => {
         if (password === confirmedPassword) {
             return true;
         } else {
-            setErrorInfo("Error: Passwords differ. Please try again.");
+            setErrorInfo(errDiffPasswords);
             return false;
         }
     }
 
     const handleSubmit = (
-        values: Values,
-        { setSubmitting }: FormikHelpers<Values>
+        values: SignUpValues,
+        { setSubmitting }: FormikHelpers<SignUpValues>
     ) => {
         const { email, password, confirmedPassword } = values;
 
         if (password) {
             const passwordIsSame = checkIfSamePassword(password, confirmedPassword);
             if (passwordIsSame) {
-                createUserWithEmailAndPassword(auth, email, password)
-                    .then((response) => {
-                        navigate("/");
-                        setErrorInfo("");
-                    })
-                    .catch((error) => {
-                        const errorCode = error.code;
-                        setErrorInfo(`Error: ${errorCode}. Please try again.`);
-                    });
+                dispatch(signUpUser({ email, password }));
                 setSubmitting(false);
             }
         } else {
-            setErrorInfo("Please enter your password");
+            setErrorInfo(errNoPassword);
         }
 
     }
@@ -78,9 +84,11 @@ function SignUpForm() {
                     <button className="sign-form__btn" type="submit">Sign Up</button>
                 </Form>
             </Formik>
-            <div className="sign-form__error-info">
-                {errorInfo}
-            </div>
+            {errorInfo &&
+                <div className="sign-form__error-info">
+                    {errorInfo}
+                </div>
+            }
         </>
     )
 }

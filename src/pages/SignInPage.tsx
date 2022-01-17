@@ -11,7 +11,7 @@ function SignInPage() {
             <section className="sign-form-container sign-in-form-container">
                 <Logo />
                 <h1 className="sign-title">Welcome back</h1>
-                <span className="sign-text">New here?</span>
+                <span className="sign-text">New here? </span>
                 <Link className="sign-link" to="/signup">Create an account</Link>
                 <SignInForm />
             </section>
