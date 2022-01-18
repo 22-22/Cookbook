@@ -1,27 +1,18 @@
-.logo-container {
+.nav__list {
   display: flex;
   align-items: center;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 88px 0 8px;
-  font-family: 'Nunito', sans-serif;
-}
-
-.logo--colored {
-  color: var(--primary-yellow);
-}
-
-.navigation ul {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
   list-style-type: none;
   cursor: pointer;
 }
 
-.navigation ul li:not(:last-child) {
-  margin: 0 72px 0 0;
+.main-btn {
+  border: 0;
+  border-radius: 10px;
+  outline: 0;
+  line-height: 30px;
+  font-weight: 700;
+  font-size: 20px;
+  background-color: var(--primary-yellow);
+  color: var(--text-main);
+  cursor: pointer;
 }

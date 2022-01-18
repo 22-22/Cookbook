@@ -47,7 +47,7 @@ export const SignInForm = () => {
                         <Field className="sign-form__input" id="password" name="password" />
                         <img className="sign-form__icon" src={hiddenInput} alt="hidden" />
                     </div>
-                    <button className="sign-form__btn" type="submit">Sign In</button>
+                    <button className="main-btn sign-form__btn" type="submit">Sign In</button>
                 </Form>
             </Formik>
             {errorInfo &&

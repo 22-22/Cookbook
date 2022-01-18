@@ -81,7 +81,7 @@ function SignUpForm() {
                         <Field className="sign-form__input" id="confirmedPassword" name="confirmedPassword" />
                         <img className="sign-form__icon" src={hiddenInput} alt="hidden" />
                     </div>
-                    <button className="sign-form__btn" type="submit">Sign Up</button>
+                    <button className="main-btn sign-form__btn" type="submit">Sign Up</button>
                 </Form>
             </Formik>
             {errorInfo &&
