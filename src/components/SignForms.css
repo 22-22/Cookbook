@@ -44,15 +44,6 @@
 .sign-form__btn {
     padding: 12px 32px;
     margin: 25px 0 20px 0;
-    border: 0;
-    border-radius: 10px;
-    outline: 0;
-    line-height: 30px;
-    font-weight: 700;
-    font-size: 20px;
-    background-color: var(--primary-yellow);
-    color: var(--text-main);
-    cursor: pointer;
 }
 
 .sign-form__error-info {
