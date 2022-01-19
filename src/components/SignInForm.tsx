@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
@@ -10,15 +10,21 @@ import './SignForms.css';
 export const SignInForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const errorInfo = useSelector((state: RootStateOrAny) => state.errorInfo);
+    const [errorInfo, setErrorInfo] = useState("");
+    const errorFromFirebase = useSelector((state: RootStateOrAny) => state.errorInfo);
     const auth = useSelector((state: RootStateOrAny) => state.isAuthenticated);
 
     useEffect(() => {
         if (auth) {
             navigate("/");
         }
-
     }, [auth]);
+
+    useEffect(() => {
+        if (errorFromFirebase) {
+            setErrorInfo(errorFromFirebase);
+        }
+    }, [errorFromFirebase]);
 
     const handleSignInSubmit = async (
         values: SignInValues,
@@ -52,7 +58,7 @@ export const SignInForm = () => {
             </Formik>
             {errorInfo &&
                 <div className="sign-form__error-info">
-                    Error: {errorInfo}. Please try again.
+                    {errorInfo}
                 </div>
             }
         </>
