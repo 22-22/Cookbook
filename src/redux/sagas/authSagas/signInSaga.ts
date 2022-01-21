@@ -1,6 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { push } from 'react-router-redux';
 import * as actionTypes from '../../actionTypes';
 import { signActionInterface } from '../../../tsTypes';
 
@@ -14,7 +13,6 @@ function* signIn(action: signActionInterface): any {
             type: actionTypes.SIGN_IN_SUCCEEDED,
             payload: { userInfo: response.user }
         });
-        // yield put(push('/'));
     } catch (error: any) {
         yield put({
             type: actionTypes.SIGN_IN_FAILED,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { signInUser } from '../redux/actionCreators';
 import hiddenInput from '../assets/icons/hidden-input.png';
@@ -9,16 +9,8 @@ import './SignForms.css';
 
 export const SignInForm = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const [errorInfo, setErrorInfo] = useState("");
     const errorFromFirebase = useSelector((state: RootStateOrAny) => state.errorInfo);
-    const auth = useSelector((state: RootStateOrAny) => state.isAuthenticated);
-
-    useEffect(() => {
-        if (auth) {
-            navigate("/");
-        }
-    }, [auth]);
 
     useEffect(() => {
         if (errorFromFirebase) {
