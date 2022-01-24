@@ -5,6 +5,7 @@ import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { signInUser } from "../../redux/actionCreators";
 import { SignInValues } from "../../tsTypes";
 import hiddenInput from "../../assets/icons/hidden-input.png";
+import shownInput from "../../assets/icons/shown-input.png";
 import "../SignForms.css";
 
 export const SignInForm = () => {
@@ -15,7 +16,7 @@ export const SignInForm = () => {
 
     useEffect(() => {
         if (errorFromFirebase) {
-            setErrorInfo(errorFromFirebase);
+            setErrorInfo(`Error: ${errorFromFirebase}. Please try again.`);
         }
     }, [errorFromFirebase]);
 
@@ -50,7 +51,7 @@ export const SignInForm = () => {
                         <Field className="sign-form__input" type={passwordHidden ? "password" : "text"}
                             id="password" name="password" />
                         <button type="button" onClick={togglePasswordHidden}>
-                            <img className="sign-form__icon" src={hiddenInput} alt="hidden" />
+                            <img className="sign-form__icon" src={passwordHidden ? hiddenInput : shownInput} alt="hidden" />
                         </button>
                     </div>
                     <button className="main-btn sign-form__btn" type="submit">Sign In</button>
