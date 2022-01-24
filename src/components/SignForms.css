@@ -39,6 +39,7 @@
     position: absolute;
     top: 16px;
     right: 12px;
+    cursor: pointer;
 }
 
 .sign-form__btn {
@@ -52,4 +53,3 @@
     font-weight: 400;
     color: #ff0000;
 }
-

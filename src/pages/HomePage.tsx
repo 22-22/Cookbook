@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { Recepie } from '../components/Recepie';
-import avatar from '../assets/john-doe.png';
-import './HomePage.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
+import { Recepie } from "../components/recepie/Recepie";
+import avatar from "../assets/john-doe.png";
+import "./HomePage.css";
 
 function HomePage() {
     return (

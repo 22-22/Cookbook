@@ -1,7 +1,7 @@
-import React from 'react';
-import './Footer.css';
-import companyName from '../assets/company-name.png';
-import Logo from './common/Logo';
+import React from "react";
+import Logo from "../common/Logo";
+import companyName from "../../assets/company-name.png";
+import "./Footer.css";
 
 function Footer() {
     return (

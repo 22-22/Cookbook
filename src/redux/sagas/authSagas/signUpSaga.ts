@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import * as actionTypes from '../../actionTypes';
-import { signActionInterface } from '../../../tsTypes';
+import * as actionTypes from "../../actionTypes";
+import { signActionInterface } from "../../../tsTypes";
 
 // ЗАБЫЛА ASYNC/AWAIT !!!
 const signUpWithFirebase = async (email: string, password: string) => {

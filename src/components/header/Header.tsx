@@ -1,7 +1,7 @@
-import React from 'react';
-import './Header.css';
-import searchIcon from '../assets/icons/search.png';
-import Logo from './common/Logo';
+import React from "react";
+import Logo from "../common/Logo";
+import searchIcon from "../../assets/icons/search.png";
+import "./Header.css";
 
 function Header() {
     return (

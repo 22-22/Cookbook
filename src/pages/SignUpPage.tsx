@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import signUp from '../assets/signup.png';
-import './SignPages.css';
-import Logo from '../components/common/Logo';
-import SignUpForm from '../components/SignUpForm';
+import React from "react";
+import { Link } from "react-router-dom";
+import Logo from "../components/common/Logo";
+import SignUpForm from "../components/signUpForm/SignUpForm";
+import signUp from "../assets/signup.png";
+import "./SignPages.css";
 
 function SignUpPage() {
     return (

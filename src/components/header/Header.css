@@ -45,7 +45,7 @@
 
 .user::before {
     content: '';
-    background-image: url('../assets/icons/person.png');
+    background-image: url('../../assets/icons/person.png');
     width: 18px;
     height: 18px;
     display: inline-flex;
@@ -54,7 +54,7 @@
 }
 
 .header__nav-list {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 .header__nav-list li:not(:last-child) {

@@ -1,6 +1,6 @@
-import React, { useEffect, FC } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { RootStateOrAny, useSelector } from 'react-redux';
+import React, { useEffect, FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { RootStateOrAny, useSelector } from "react-redux";
 
 export const useAuth = (Component: FC) => {
     const navigate = useNavigate();

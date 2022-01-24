@@ -1,5 +1,5 @@
-import React from 'react';
-import { RootStateOrAny, useSelector } from 'react-redux';
+import React from "react";
+import { RootStateOrAny, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {

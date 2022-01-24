@@ -9,11 +9,15 @@ export interface signActionInterface {
 export interface authActionInterface {
     type: string,
     payload: {
-        userInfo: {},
-        errorInfo: ''
+        userInfo: object,
+        errorInfo: string
     }
 }
-
+export interface authStateInterface {
+    isAuthenticated: Boolean,
+    userInfo: object,
+    errorInfo: string
+}
 export interface SignUpValues {
     email: string;
     password: string;

@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Logo from '../components/common/Logo';
-import { SignInForm } from '../components/SignInForm';
+import React from "react";
+import { Link } from "react-router-dom";
+import Logo from "../components/common/Logo";
+import { SignInForm } from "../components/signInForm/SignInForm";
 import { useAuth } from "../components/common/useAuth";
-import signUp from '../assets/signin.png';
-import './SignPages.css';
+import signUp from "../assets/signin.png";
+import "./SignPages.css";
 
 function SignInPage() {
     const formWithAuth = useAuth(SignInForm);

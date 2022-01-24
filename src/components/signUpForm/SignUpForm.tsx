@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Formik, Field, Form, FormikHelpers } from 'formik';
+import React, { useEffect, useState } from "react";
+import { Formik, Field, Form, FormikHelpers } from "formik";
 import { useNavigate, Link } from "react-router-dom";
-import hiddenInput from '../assets/icons/hidden-input.png';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { signUpUser } from '../redux/actionCreators';
-import { SignUpValues } from '../tsTypes';
-import './SignForms.css';
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { signUpUser } from "../../redux/actionCreators";
+import { SignUpValues } from "../../tsTypes";
+import hiddenInput from "../../assets/icons/hidden-input.png";
+import "../SignForms.css";
 
 const errTryAgain = "Please try again.";
 const errDiffPasswords = `Error: Passwords differ. ${errTryAgain}`;
@@ -26,7 +26,7 @@ function SignUpForm() {
 
     useEffect(() => {
         if (errorFromFirebase) {
-            setErrorInfo( `Error: ${errorFromFirebase}. ${errTryAgain}`);
+            setErrorInfo(`Error: ${errorFromFirebase}. ${errTryAgain}`);
         }
     }, [errorFromFirebase]);
 
@@ -60,9 +60,9 @@ function SignUpForm() {
     return (
         <>
             <Formik initialValues={{
-                email: '',
-                password: '',
-                confirmedPassword: '',
+                email: "",
+                password: "",
+                confirmedPassword: "",
             }}
                 onSubmit={handleSubmit}>
                 <Form className="sign-form">

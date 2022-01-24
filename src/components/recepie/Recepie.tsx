@@ -1,10 +1,10 @@
-import React from 'react';
-import viewIcon from '../assets/icons/view.png';
-import heartIcon from '../assets/icons/heart_outline.png';
-import commentIcon from '../assets/icons/comment.png';
-import pancakes from '../assets/pancakes.png';
-import ellipseYellow from '../assets/ellipse-yellow.png';
-import './Recepie.css'
+import React from "react";
+import viewIcon from "../../assets/icons/view.png";
+import heartIcon from "../../assets/icons/heart_outline.png";
+import commentIcon from "../../assets/icons/comment.png";
+import pancakes from "../../assets/pancakes.png";
+import ellipseYellow from "../../assets/ellipse-yellow.png";
+import "./Recepie.css"
 
 export const Recepie = () => {
     return (
