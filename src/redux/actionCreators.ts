@@ -18,3 +18,38 @@ export const signUpUser = (payload: {
     }
 }
 
+export const handleSignInSucceeded = (payload: {
+    userInfo: object
+}) => {
+    return {
+        type: actionTypes.SIGN_IN_SUCCEEDED,
+        payload
+    }
+}
+
+export const handleSignInFailed = (payload: {
+    errorInfo: string
+}) => {
+    return {
+        type: actionTypes.SIGN_IN_FAILED,
+        payload
+    }
+}
+
+export const handleSignUpSucceeded = (payload: {
+    userInfo: object
+}) => {
+    return {
+        type: actionTypes.SIGN_UP_SUCCEEDED,
+        payload
+    }
+}
+
+export const handleSignUpFailed = (payload: {
+    errorInfo: string
+}) => {
+    return {
+        type: actionTypes.SIGN_UP_FAILED,
+        payload
+    }
+}

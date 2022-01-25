@@ -2,8 +2,8 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import * as actionTypes from "../../actionTypes";
 import { signActionInterface } from "../../../tsTypes";
+import { handleSignUpSucceeded, handleSignUpFailed } from "../../actionCreators";
 
-// ЗАБЫЛА ASYNC/AWAIT !!!
 const signUpWithFirebase = async (email: string, password: string) => {
     try {
         const auth = getAuth();
@@ -17,15 +17,11 @@ function* signUp(action: signActionInterface): any {
     try {
         const response = yield call(signUpWithFirebase,
             action.payload.email, action.payload.password);
-        yield put({
-            type: actionTypes.SIGN_UP_SUCCEEDED,
-            payload: { userInfo: response.user }
-        });
+        const payload = { userInfo: response.user };
+        yield put(handleSignUpSucceeded(payload));
     } catch (error: any) {
-        yield put({
-            type: actionTypes.SIGN_UP_FAILED,
-            payload: { errorInfo: error.message }
-        });
+        const payload = { errorInfo: error.message };
+        yield put(handleSignUpFailed(payload));
     }
 }
 
