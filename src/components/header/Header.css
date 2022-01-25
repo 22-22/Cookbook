@@ -1,13 +1,13 @@
 .header {
-    padding: 17px 10%;
+    padding: 17px 12%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     font-family: 'Nunito', sans-serif;
 }
 
 .search {
     position: relative;
-    margin: 0 0 0 88px;
 }
 
 .search__icon {
@@ -22,11 +22,13 @@
     height: 40px;
     background-color: #F7F7F7;
     border-radius: 10px;
+    outline: 0;
+    border: 0;
 }
 
-.create-btn {
+.create-book-btn {
     padding: 8px 28px;
-    margin: 0 92px 0 35px;
+    margin: 0 35px 0 0;
     font-family: 'Nunito', sans-serif;
     font-size: 20px;
     font-weight: 700;
@@ -43,10 +45,18 @@
 
 .user::before {
     content: '';
-    background-image: url('../assets/icons/person.png');
+    background-image: url('../../assets/icons/person.png');
     width: 18px;
     height: 18px;
     display: inline-flex;
     margin: 0 7px 0 0;
     vertical-align: middle;
+}
+
+.header__nav-list {
+    font-size: 16px;
+}
+
+.header__nav-list li:not(:last-child) {
+    margin: 0 72px 0 0;
 }
