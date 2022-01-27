@@ -1,11 +1,12 @@
 import * as tsTypes from "../../tsTypes";
+import defaultAvatar from "../../assets/default-avatar.jpg"
 
 export function updateStateOnAuthSuccess(
-    state: tsTypes.authStateInterface, action: tsTypes.authActionInterface
+    state: tsTypes.userDataState, action: tsTypes.setUserAction
 ) {
     return {
         ...state,
-        authInfo: action.payload.authInfo,
+        userInfo: action.payload.userInfo,
         isAuthenticated: true,
         errorInfo: ""
     }
@@ -21,9 +22,18 @@ export function setError(state: any, action: any) {
 export function updateStateWithAllUserData(
     state: tsTypes.userDataState, action: tsTypes.setUserAction
 ) {
+    let data = action.payload.userInfo;
+    if (!data.name) {
+        data = { ...data, name: state.userInfo.email }
+    }
+    if (!data.avatar) {
+        data = { ...data, avatar: defaultAvatar }
+    }
     return {
         ...state,
-        userInfo: action.payload.userInfo,
+        userInfo: {
+            ...state.userInfo, ...data,
+        },
         errorInfo: ""
     }
 }

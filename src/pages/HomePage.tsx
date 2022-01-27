@@ -1,37 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DocumentData } from "firebase/firestore"
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserFromDB } from "../redux/actionCreators";
+import { selectError, selectUserInfo } from "../redux/selectors";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { Recepie } from "../components/recepie/Recepie";
-import defaultAvatar from "../assets/default-avatar.jpg"
 import "./HomePage.css";
 
 function HomePage() {
     const dispatch = useDispatch();
-    const id = useSelector((state: RootStateOrAny) => state.auth.authInfo.uid);
-    const email = useSelector((state: RootStateOrAny) => state.auth.authInfo.email);
-    const userDataFromDB = useSelector((state: RootStateOrAny) => state.user.userInfo);
-    const errorInfo = useSelector((state: RootStateOrAny) => state.user.errorInfo);
+    const userDataFromDB = useSelector(selectUserInfo);
+    const errorInfo = useSelector(selectError);
 
     const [userData, setUserData] = useState<DocumentData>({});
     const [error, setError] = useState("");
 
     useEffect(() => {
-        dispatch(getUserFromDB({ id }));
+        dispatch(getUserFromDB({ id: userDataFromDB.uid }));
     }, []);
 
     useEffect(() => {
-        let data = userDataFromDB;
-        if (!userDataFromDB.name) {
-            data = { ...data, name: email }
-        }
-        if (!userDataFromDB.avatar) {
-            data = { ...data, avatar: defaultAvatar }
-        }
-        setUserData(data);
+        setUserData(userDataFromDB);
     }, [userDataFromDB]);
 
     useEffect(() => {

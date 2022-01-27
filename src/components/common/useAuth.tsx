@@ -1,10 +1,11 @@
 import React, { useEffect, FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { RootStateOrAny, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { selectAuth } from "../../redux/selectors";
 
 export const useAuth = (Component: FC) => {
     const navigate = useNavigate();
-    const auth = useSelector((state: RootStateOrAny) => state.auth.isAuthenticated);
+    const auth = useSelector(selectAuth);
 
     useEffect(() => {
         if (auth) {

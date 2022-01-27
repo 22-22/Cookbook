@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import { Link } from "react-router-dom";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../../redux/actionCreators";
 import { SignUpValues } from "../../tsTypes";
+import { selectError } from "../../redux/selectors";
 import hiddenInput from "../../assets/icons/hidden-input.png";
 import shownInput from "../../assets/icons/shown-input.png";
 import "../SignForms.css";
@@ -19,7 +20,7 @@ function SignUpForm() {
         password: true,
         confirmedPassword: true
     });
-    const errorFromFirebase = useSelector((state: RootStateOrAny) => state.auth.errorInfo);
+    const errorFromFirebase = useSelector(selectError);
 
     useEffect(() => {
         if (errorFromFirebase) {

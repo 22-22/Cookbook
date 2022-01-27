@@ -9,7 +9,7 @@ function* signIn(action: signActionInterface): any {
         const auth = getAuth();
         const response = yield call(signInWithEmailAndPassword, auth,
             action.payload.email, action.payload.password);
-        const payload = { authInfo: response.user };
+        const payload = { userInfo: response.user };
         yield put(handleSignInSucceeded(payload));
     } catch (error: any) {
         const payload = { errorInfo: error.code };

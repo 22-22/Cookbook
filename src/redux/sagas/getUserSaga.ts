@@ -12,6 +12,9 @@ function* getUser(action: getUserAction): any {
         if (docSnap.exists()) {
             const payload = { userInfo: docSnap.data() };
             yield put(getUserSucceeded(payload))
+        } else {
+            // может, можно не передавать пустой объект
+            yield put(getUserSucceeded({ userInfo: {} }))
         }
     } catch (error: any) {
         const payload = { errorInfo: error.code };

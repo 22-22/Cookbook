@@ -17,7 +17,7 @@ function* signUp(action: signActionInterface): any {
     try {
         const response = yield call(signUpWithFirebase,
             action.payload.email, action.payload.password);
-        const payload = { authInfo: response.user };
+        const payload = { userInfo: response.user };
         yield put(handleSignUpSucceeded(payload));
     } catch (error: any) {
         const payload = { errorInfo: error.message };

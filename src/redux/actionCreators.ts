@@ -19,7 +19,7 @@ export const signUpUser = (payload: {
 };
 
 export const handleSignInSucceeded = (payload: {
-    authInfo: object
+    userInfo: object
 }) => {
     return {
         type: actionTypes.SIGN_IN_SUCCEEDED,
@@ -37,7 +37,7 @@ export const handleSignInFailed = (payload: {
 };
 
 export const handleSignUpSucceeded = (payload: {
-    authInfo: object
+    userInfo: object
 }) => {
     return {
         type: actionTypes.SIGN_UP_SUCCEEDED,

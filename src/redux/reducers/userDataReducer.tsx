@@ -1,15 +1,24 @@
-import * as types from "../actionTypes";
-import { updateStateWithAllUserData, setError } from "./reducerHandlers";
+import * as actionTypes from "../actionTypes";
+import { updateStateOnAuthSuccess, updateStateWithAllUserData, setError } from "./reducerHandlers";
 import { userDataState, setUserAction } from "../../tsTypes";
 
 const initialState = {
-    userInfo: {},
+    isAuthenticated: false,
+    userInfo: {
+        name: "",
+        email: "",
+        avatar: "",
+    },
     errorInfo: ""
 };
 
 const handlers = {
-    [types.GET_USER_SUCCEEDED]: updateStateWithAllUserData,
-    [types.GET_USER_FAILED]: setError
+    [actionTypes.SIGN_IN_SUCCEEDED]: updateStateOnAuthSuccess,
+    [actionTypes.SIGN_IN_FAILED]: setError,
+    [actionTypes.SIGN_UP_SUCCEEDED]: updateStateOnAuthSuccess,
+    [actionTypes.SIGN_UP_FAILED]: setError,
+    [actionTypes.GET_USER_SUCCEEDED]: updateStateWithAllUserData,
+    [actionTypes.GET_USER_FAILED]: setError
 };
 
 const userDataReducerFactory = (initialState: userDataState, handlers: any) => {
@@ -21,4 +30,5 @@ const userDataReducerFactory = (initialState: userDataState, handlers: any) => {
         }
     }
 }
+
 export const userDataReducer = userDataReducerFactory(initialState, handlers);
