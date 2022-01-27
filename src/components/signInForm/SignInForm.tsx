@@ -12,7 +12,7 @@ export const SignInForm = () => {
     const dispatch = useDispatch();
     const [errorInfo, setErrorInfo] = useState("");
     const [passwordHidden, setPasswordHidden] = useState(true);
-    const errorFromFirebase = useSelector((state: RootStateOrAny) => state.errorInfo);
+    const errorFromFirebase = useSelector((state: RootStateOrAny) => state.auth.errorInfo);
 
     useEffect(() => {
         if (errorFromFirebase) {
@@ -50,15 +50,15 @@ export const SignInForm = () => {
                     <div className="sign-form__input-block">
                         <Field className="sign-form__input" type={passwordHidden ? "password" : "text"}
                             id="password" name="password" />
-                        <button type="button" onClick={togglePasswordHidden}>
-                            <img className="sign-form__icon" src={passwordHidden ? hiddenInput : shownInput} alt="hidden" />
+                        <button className="sign-form__btn--eye" type="button" onClick={togglePasswordHidden}>
+                            <img src={passwordHidden ? hiddenInput : shownInput} alt="hidden" />
                         </button>
                     </div>
                     <button className="main-btn sign-form__btn" type="submit">Sign In</button>
                 </Form>
             </Formik>
             {errorInfo &&
-                <div className="sign-form__error-info">
+                <div className="error-info">
                     {errorInfo}
                 </div>
             }

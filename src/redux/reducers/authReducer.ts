@@ -4,7 +4,7 @@ import { updateStateOnAuthSuccess, setError } from "./reducerHandlers";
 
 const initialState = {
     isAuthenticated: false,
-    userInfo: {},
+    authInfo: {},
     errorInfo: ""
 };
 

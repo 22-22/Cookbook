@@ -10,10 +10,14 @@
 
 .personal-info img {
     margin: 0 40px 0 0;
+    width: 160px;
+    height: 160px;
+    line-height: 160px;
+    border-radius: 50%;
+    text-align: center;
 }
 
 .personal-info h1 {
-    margin: 0 0 16px 0;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 40px;
@@ -23,6 +27,7 @@
 
 .personal-info p {
     max-width: 504px;
+    margin: 16px 0 0;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     line-height: 22px;

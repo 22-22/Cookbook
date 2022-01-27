@@ -19,7 +19,7 @@ function SignUpForm() {
         password: true,
         confirmedPassword: true
     });
-    const errorFromFirebase = useSelector((state: RootStateOrAny) => state.errorInfo);
+    const errorFromFirebase = useSelector((state: RootStateOrAny) => state.auth.errorInfo);
 
     useEffect(() => {
         if (errorFromFirebase) {
@@ -80,23 +80,23 @@ function SignUpForm() {
                     <div className="sign-form__input-block">
                         <Field type={hidden.password ? "password" : "text"}
                             className="sign-form__input" id="password" name="password" />
-                        <button type="button" onClick={() => togglePasswordHidden("password")}>
-                            <img className="sign-form__icon" src={hidden.password ? hiddenInput : shownInput} alt="hidden" />
+                        <button className="sign-form__btn--eye" type="button" onClick={() => togglePasswordHidden("password")}>
+                            <img src={hidden.password ? hiddenInput : shownInput} alt="hidden" />
                         </button>
                     </div>
                     <label className="sign-form__label" htmlFor="confirmedPassword">Confirm Password</label>
                     <div className="sign-form__input-block">
                         <Field type={hidden.confirmedPassword ? "password" : "text"}
                             className="sign-form__input" id="confirmedPassword" name="confirmedPassword" />
-                        <button type="button" onClick={() => togglePasswordHidden("confirmedPassword")}>
-                            <img className="sign-form__icon" src={hidden.confirmedPassword ? hiddenInput : shownInput} alt="hidden" />
+                        <button className="sign-form__btn--eye" type="button" onClick={() => togglePasswordHidden("confirmedPassword")}>
+                            <img src={hidden.confirmedPassword ? hiddenInput : shownInput} alt="hidden" />
                         </button>
                     </div>
                     <button className="main-btn sign-form__btn" type="submit">Sign Up</button>
                 </Form>
             </Formik>
             {errorInfo &&
-                <div className="sign-form__error-info">
+                <div className="error-info">
                     {errorInfo}
                 </div>
             }

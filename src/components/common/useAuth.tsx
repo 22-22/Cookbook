@@ -4,7 +4,7 @@ import { RootStateOrAny, useSelector } from "react-redux";
 
 export const useAuth = (Component: FC) => {
     const navigate = useNavigate();
-    const auth = useSelector((state: RootStateOrAny) => state.isAuthenticated);
+    const auth = useSelector((state: RootStateOrAny) => state.auth.isAuthenticated);
 
     useEffect(() => {
         if (auth) {

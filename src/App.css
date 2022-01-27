@@ -16,3 +16,10 @@
   color: var(--text-main);
   cursor: pointer;
 }
+
+.error-info {
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #ff0000;
+}

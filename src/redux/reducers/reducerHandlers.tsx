@@ -1,21 +1,29 @@
-import { authStateInterface, authActionInterface } from "../../tsTypes";
+import * as tsTypes from "../../tsTypes";
 
 export function updateStateOnAuthSuccess(
-    state: authStateInterface, action: authActionInterface
+    state: tsTypes.authStateInterface, action: tsTypes.authActionInterface
 ) {
     return {
         ...state,
-        userInfo: action.payload.userInfo,
+        authInfo: action.payload.authInfo,
         isAuthenticated: true,
         errorInfo: ""
     }
 }
 
-export function setError(
-    state: authStateInterface, action: authActionInterface
-) {
+export function setError(state: any, action: any) {
     return {
         ...state,
         errorInfo: action.payload.errorInfo
+    }
+}
+
+export function updateStateWithAllUserData(
+    state: tsTypes.userDataState, action: tsTypes.setUserAction
+) {
+    return {
+        ...state,
+        userInfo: action.payload.userInfo,
+        errorInfo: ""
     }
 }
