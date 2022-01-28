@@ -7,15 +7,14 @@ import { selectError, selectUserInfo } from "../redux/selectors";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { Recepie } from "../components/recepie/Recepie";
-import "./HomePage.css";
+import { ErrorInfo } from "../components/common/ErrorInfo";
+import "./ProfilePage.css";
 
-function HomePage() {
+function ProfilePage() {
     const dispatch = useDispatch();
     const userDataFromDB = useSelector(selectUserInfo);
     const errorInfo = useSelector(selectError);
-
     const [userData, setUserData] = useState<DocumentData>({});
-    const [error, setError] = useState("");
 
     useEffect(() => {
         dispatch(getUserFromDB({ id: userDataFromDB.uid }));
@@ -25,17 +24,13 @@ function HomePage() {
         setUserData(userDataFromDB);
     }, [userDataFromDB]);
 
-    useEffect(() => {
-        setError(errorInfo);
-    }, [errorInfo]);
-
     return (
         <div>
             <Header />
             <main className="home-page">
                 {
-                    error ? (
-                        <div className="error-info">{error}</div>
+                    errorInfo ? (
+                        <ErrorInfo errorInfo={errorInfo} />
                     ) : (
                         <section className="personal-info">
                             <img src={userData.avatar} alt="avatar" />
@@ -73,4 +68,4 @@ function HomePage() {
     )
 }
 
-export default HomePage;
+export default ProfilePage;

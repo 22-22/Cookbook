@@ -5,7 +5,7 @@ import {
   Route
 } from "react-router-dom";
 import "./App.css";
-import HomePage from "./pages/HomePage";
+import ProfilePage from "./pages/ProfilePage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import ProtectedRoute from "./auth/ProtectedRoute";
@@ -18,7 +18,7 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <HomePage />
+              <ProfilePage />
             </ProtectedRoute>
           }
         />

@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { signInUser } from "../../redux/actionCreators";
 import { SignInValues } from "../../tsTypes";
 import { selectError } from "../../redux/selectors";
-import hiddenInput from "../../assets/icons/hidden-input.png";
-import shownInput from "../../assets/icons/shown-input.png";
+import { ShowHidePasswordBtn } from "../common/ShowHidePasswordBtn";
+import { ErrorInfo } from "../common/ErrorInfo";
 import "../SignForms.css";
 
 export const SignInForm = () => {
     const dispatch = useDispatch();
     const [errorInfo, setErrorInfo] = useState("");
-    const [passwordHidden, setPasswordHidden] = useState(true);
+    const [isPasswordHidden, setPasswordHidden] = useState(true);
     const errorFromFirebase = useSelector(selectError);
 
     useEffect(() => {
@@ -49,19 +49,18 @@ export const SignInForm = () => {
                         <Link className="sign-form__link" to="">Forgot password?</Link>
                     </div>
                     <div className="sign-form__input-block">
-                        <Field className="sign-form__input" type={passwordHidden ? "password" : "text"}
+                        <Field className="sign-form__input" type={isPasswordHidden ? "password" : "text"}
                             id="password" name="password" />
-                        <button className="sign-form__btn--eye" type="button" onClick={togglePasswordHidden}>
-                            <img src={passwordHidden ? hiddenInput : shownInput} alt="hidden" />
-                        </button>
+                        <ShowHidePasswordBtn
+                            togglePasswordHidden={togglePasswordHidden}
+                            isPasswordHidden={isPasswordHidden}
+                        />
                     </div>
                     <button className="main-btn sign-form__btn" type="submit">Sign In</button>
                 </Form>
             </Formik>
-            {errorInfo &&
-                <div className="error-info">
-                    {errorInfo}
-                </div>
+            {
+                errorInfo && <ErrorInfo errorInfo={errorInfo} />
             }
         </>
     )

@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../../redux/actionCreators";
 import { SignUpValues } from "../../tsTypes";
 import { selectError } from "../../redux/selectors";
-import hiddenInput from "../../assets/icons/hidden-input.png";
-import shownInput from "../../assets/icons/shown-input.png";
+import { ShowHidePasswordBtn } from "../common/ShowHidePasswordBtn";
+import { ErrorInfo } from "../common/ErrorInfo";
 import "../SignForms.css";
 
 const errTryAgain = "Please try again.";
@@ -16,7 +16,7 @@ const errNoPassword = "Please enter your password.";
 function SignUpForm() {
     const dispatch = useDispatch();
     const [errorInfo, setErrorInfo] = useState("");
-    const [hidden, setHidden] = useState({
+    const [isHidden, setHidden] = useState({
         password: true,
         confirmedPassword: true
     });
@@ -79,27 +79,29 @@ function SignUpForm() {
                         <Link className="sign-form__link" to="">Forgot Password?</Link>
                     </div>
                     <div className="sign-form__input-block">
-                        <Field type={hidden.password ? "password" : "text"}
+                        <Field type={isHidden.password ? "password" : "text"}
                             className="sign-form__input" id="password" name="password" />
-                        <button className="sign-form__btn--eye" type="button" onClick={() => togglePasswordHidden("password")}>
-                            <img src={hidden.password ? hiddenInput : shownInput} alt="hidden" />
-                        </button>
+                        <ShowHidePasswordBtn
+                            togglePasswordHidden={togglePasswordHidden}
+                            isPasswordHidden={isHidden.password}
+                            inputType="password"
+                        />
                     </div>
                     <label className="sign-form__label" htmlFor="confirmedPassword">Confirm Password</label>
                     <div className="sign-form__input-block">
-                        <Field type={hidden.confirmedPassword ? "password" : "text"}
+                        <Field type={isHidden.confirmedPassword ? "password" : "text"}
                             className="sign-form__input" id="confirmedPassword" name="confirmedPassword" />
-                        <button className="sign-form__btn--eye" type="button" onClick={() => togglePasswordHidden("confirmedPassword")}>
-                            <img src={hidden.confirmedPassword ? hiddenInput : shownInput} alt="hidden" />
-                        </button>
+                        <ShowHidePasswordBtn
+                            togglePasswordHidden={togglePasswordHidden}
+                            isPasswordHidden={isHidden.confirmedPassword}
+                            inputType="confirmedPassword"
+                        />
                     </div>
                     <button className="main-btn sign-form__btn" type="submit">Sign Up</button>
                 </Form>
             </Formik>
-            {errorInfo &&
-                <div className="error-info">
-                    {errorInfo}
-                </div>
+            {
+                errorInfo && <ErrorInfo errorInfo={errorInfo} />
             }
         </>
     )
