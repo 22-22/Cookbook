@@ -9,13 +9,8 @@ function* getUser(action: getUserAction): any {
     try {
         const docRef = doc(firestoreDB, "users", action.payload.id);
         const docSnap = yield call(getDoc, docRef);
-        if (docSnap.exists()) {
-            const payload = { userInfo: docSnap.data() };
-            yield put(getUserSucceeded(payload))
-        } else {
-            // может, можно не передавать пустой объект
-            yield put(getUserSucceeded({ userInfo: {} }))
-        }
+        const payload = { userInfo: docSnap.exists() ? docSnap.data() : {} };
+        yield put(getUserSucceeded(payload));
     } catch (error: any) {
         const payload = { errorInfo: error.code };
         yield put(getUserFailed(payload));
