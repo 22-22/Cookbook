@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, FormikHelpers } from "formik";
 import { Link } from "react-router-dom";
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signInUser } from "../../redux/actionCreators";
 import { SignInValues } from "../../tsTypes";
-import hiddenInput from "../../assets/icons/hidden-input.png";
-import shownInput from "../../assets/icons/shown-input.png";
+import { selectError } from "../../redux/selectors";
+import { ShowHidePasswordBtn } from "../common/ShowHidePasswordBtn";
+import { ErrorInfo } from "../common/ErrorInfo";
 import "../SignForms.css";
 
 export const SignInForm = () => {
     const dispatch = useDispatch();
     const [errorInfo, setErrorInfo] = useState("");
-    const [passwordHidden, setPasswordHidden] = useState(true);
-    const errorFromFirebase = useSelector((state: RootStateOrAny) => state.errorInfo);
+    const [isPasswordHidden, setPasswordHidden] = useState(true);
+    const errorFromFirebase = useSelector(selectError);
 
     useEffect(() => {
         if (errorFromFirebase) {
@@ -48,19 +49,18 @@ export const SignInForm = () => {
                         <Link className="sign-form__link" to="">Forgot password?</Link>
                     </div>
                     <div className="sign-form__input-block">
-                        <Field className="sign-form__input" type={passwordHidden ? "password" : "text"}
+                        <Field className="sign-form__input" type={isPasswordHidden ? "password" : "text"}
                             id="password" name="password" />
-                        <button type="button" onClick={togglePasswordHidden}>
-                            <img className="sign-form__icon" src={passwordHidden ? hiddenInput : shownInput} alt="hidden" />
-                        </button>
+                        <ShowHidePasswordBtn
+                            togglePasswordHidden={togglePasswordHidden}
+                            isPasswordHidden={isPasswordHidden}
+                        />
                     </div>
                     <button className="main-btn sign-form__btn" type="submit">Sign In</button>
                 </Form>
             </Formik>
-            {errorInfo &&
-                <div className="sign-form__error-info">
-                    {errorInfo}
-                </div>
+            {
+                errorInfo && <ErrorInfo errorInfo={errorInfo} />
             }
         </>
     )

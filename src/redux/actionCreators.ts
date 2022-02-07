@@ -7,7 +7,7 @@ export const signInUser = (payload: {
         type: actionTypes.SIGN_IN_USER,
         payload
     }
-}
+};
 
 export const signUpUser = (payload: {
     email: string, password: string
@@ -16,7 +16,7 @@ export const signUpUser = (payload: {
         type: actionTypes.SIGN_UP_USER,
         payload
     }
-}
+};
 
 export const handleSignInSucceeded = (payload: {
     userInfo: object
@@ -25,7 +25,7 @@ export const handleSignInSucceeded = (payload: {
         type: actionTypes.SIGN_IN_SUCCEEDED,
         payload
     }
-}
+};
 
 export const handleSignInFailed = (payload: {
     errorInfo: string
@@ -34,7 +34,7 @@ export const handleSignInFailed = (payload: {
         type: actionTypes.SIGN_IN_FAILED,
         payload
     }
-}
+};
 
 export const handleSignUpSucceeded = (payload: {
     userInfo: object
@@ -43,13 +43,40 @@ export const handleSignUpSucceeded = (payload: {
         type: actionTypes.SIGN_UP_SUCCEEDED,
         payload
     }
-}
+};
 
 export const handleSignUpFailed = (payload: {
     errorInfo: string
 }) => {
     return {
         type: actionTypes.SIGN_UP_FAILED,
+        payload
+    }
+};
+
+export const getUserFromDB = (payload: {
+    id: string
+}) => {
+    return {
+        type: actionTypes.GET_USER_FROM_DB,
+        payload
+    }
+};
+
+export const getUserSucceeded = (payload: {
+    userInfo: object
+}) => {
+    return {
+        type: actionTypes.GET_USER_SUCCEEDED,
+        payload
+    }
+};
+
+export const getUserFailed = (payload: {
+    errorInfo: string
+}) => {
+    return {
+        type: actionTypes.GET_USER_FAILED,
         payload
     }
 }

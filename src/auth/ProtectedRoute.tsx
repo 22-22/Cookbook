@@ -1,9 +1,10 @@
 import React from "react";
-import { RootStateOrAny, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { selectAuth } from "../redux/selectors";
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
-    const auth = useSelector((state: RootStateOrAny) => state.isAuthenticated);
+    const auth = useSelector(selectAuth);
     return auth ? children : <Navigate to="/signin" />;
 }
 

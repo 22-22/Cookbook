@@ -1,7 +1,8 @@
-import { authStateInterface, authActionInterface } from "../../tsTypes";
+import * as tsTypes from "../../tsTypes";
+import defaultAvatar from "../../assets/default-avatar.jpg"
 
 export function updateStateOnAuthSuccess(
-    state: authStateInterface, action: authActionInterface
+    state: tsTypes.userDataState, action: tsTypes.setUserAction
 ) {
     return {
         ...state,
@@ -11,11 +12,28 @@ export function updateStateOnAuthSuccess(
     }
 }
 
-export function setError(
-    state: authStateInterface, action: authActionInterface
-) {
+export function setError(state: any, action: any) {
     return {
         ...state,
         errorInfo: action.payload.errorInfo
+    }
+}
+
+export function updateStateWithAllUserData(
+    state: tsTypes.userDataState, action: tsTypes.setUserAction
+) {
+    let data = action.payload.userInfo;
+    if (!data.name) {
+        data = { ...data, name: state.userInfo.email }
+    }
+    if (!data.avatar) {
+        data = { ...data, avatar: defaultAvatar }
+    }
+    return {
+        ...state,
+        userInfo: {
+            ...state.userInfo, ...data,
+        },
+        errorInfo: ""
     }
 }

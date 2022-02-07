@@ -5,3 +5,7 @@ export const SIGN_IN_FAILED = "SIGN_IN_FAILED";
 export const SIGN_UP_USER = "SIGN_UP_USER";
 export const SIGN_UP_SUCCEEDED = "SIGN_UP_SUCCEEDED";
 export const SIGN_UP_FAILED = "SIGN_UP_FAILED";
+
+export const GET_USER_FROM_DB = "GET_USER_FROM_DB";
+export const GET_USER_SUCCEEDED = "GET_USER_SUCCEEDED";
+export const GET_USER_FAILED = "GET_USER_FAILED";

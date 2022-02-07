@@ -3,12 +3,14 @@ import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore"
 import App from "./App";
 import { store } from "./redux/store";
 import { firebaseConfig } from "./auth/firebase-config";
 import "./index.css";
 
 initializeApp(firebaseConfig);
+export const firestoreDB = getFirestore();
 
 ReactDOM.render(
   <React.StrictMode>
