@@ -1,28 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { DocumentData } from "firebase/firestore"
 import { useDispatch, useSelector } from "react-redux";
-import { getUserFromDB } from "../redux/actionCreators";
+import { getUserFromDB, uploadImage } from "../redux/actionCreators";
 import { selectError, selectUserInfo } from "../redux/selectors";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { Recepie } from "../components/recepie/Recepie";
 import { ErrorInfo } from "../components/common/ErrorInfo";
+import { Settings } from "../components/settings/Settings";
+import cameraIcon from "../assets/icons/camera.png";
 import "./ProfilePage.css";
+
+const cookbooksTab = "cookbooks";
+const recepiesTab = "recepies";
+const settingsTab = "settings";
 
 function ProfilePage() {
     const dispatch = useDispatch();
-    const userDataFromDB = useSelector(selectUserInfo);
+    const userDataFromStore = useSelector(selectUserInfo);
     const errorInfo = useSelector(selectError);
-    const [userData, setUserData] = useState<DocumentData>({});
+
+    const [inputFile, setInputFile] = useState<File>();
+    const [avatar, setAvatar] = useState("");
+    const [activeTab, setActiveTab] = useState(settingsTab);
 
     useEffect(() => {
-        dispatch(getUserFromDB({ id: userDataFromDB.uid }));
+        dispatch(getUserFromDB({ id: userDataFromStore.uid }));
     }, []);
 
     useEffect(() => {
-        setUserData(userDataFromDB);
-    }, [userDataFromDB]);
+        setAvatar(userDataFromStore.avatar);
+    }, [userDataFromStore]);
+
+    const handleInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
+        if (evt.target.files) {
+            const file = evt.target.files[0];
+            setAvatar(URL.createObjectURL(file));
+            setInputFile(file);
+        };
+    };
+
+    const saveAvatar = async (evt: React.FormEvent<HTMLFormElement>) => {
+        evt.preventDefault();
+        if (inputFile) {
+            const payload = { id: userDataFromStore.uid, file: inputFile, folderName: "avatars" };
+            dispatch(uploadImage(payload));
+        }
+    }
+
+    const changeTab = (tabName: string) => {
+        setActiveTab(tabName);
+    }
 
     return (
         <div>
@@ -33,35 +60,63 @@ function ProfilePage() {
                         <ErrorInfo errorInfo={errorInfo} />
                     ) : (
                         <section className="personal-info">
-                            <img src={userData.avatar} alt="avatar" />
+                            <form className="avatar-form" method="post" encType="multipart/form-data" onSubmit={saveAvatar}>
+                                <div className="avatar-block">
+                                    <img className={"avatar" + (activeTab === settingsTab ? " avatar--blurred" : "")}
+                                        src={avatar} alt="avatar" />
+                                    {activeTab === settingsTab && (
+                                        <>
+                                            <img className="camera-icon" src={cameraIcon} alt="camera" />
+                                            <input type="file" name="avatar" id="avatar" accept="image/*" onChange={handleInput} />
+                                        </>
+                                    )}
+                                </div>
+                                {activeTab === settingsTab && <button className="settings-btn">Save</button>}
+                            </form>
                             <div>
-                                <h1>{userData.name}</h1>
-                                <p>{userData.details} </p>
+                                <h1>{userDataFromStore.name}</h1>
+                                <p>{userDataFromStore.details} </p>
                             </div>
                         </section>
                     )
                 }
                 <section className="profile__nav-block">
                     <nav>
-                        <ul className="nav__list profile__nav-list">
+                        <ul className="nav-list profile__nav-list">
                             <li>
-                                <Link to="">My Cookbooks</Link>
+                                <button
+                                    className={"profile__nav-btn" + (activeTab === cookbooksTab ? " profile__nav-btn--active" : "")}
+                                    onClick={() => changeTab(cookbooksTab)}>
+                                    My Cookbooks
+                                </button>
                             </li>
                             <li>
-                                <Link to="">My Recepies</Link>
+                                <button
+                                    className={"profile__nav-btn" + (activeTab === recepiesTab ? " profile__nav-btn--active" : "")}
+                                    onClick={() => changeTab(recepiesTab)}>
+                                    My Recepies
+                                </button>
                             </li>
                             <li>
-                                <Link to="">My Settings</Link>
+                                <button
+                                    className={"profile__nav-btn" + (activeTab === settingsTab ? " profile__nav-btn--active" : "")}
+                                    onClick={() => changeTab(settingsTab)}>
+                                    My Settings
+                                </button>
                             </li>
                         </ul>
                     </nav>
                     <button className="main-btn create-recepie-btn">Create New Recepie</button>
                 </section>
-                <section>
-                    <Recepie />
-                    <Recepie />
-                    <Recepie />
-                </section>
+                {activeTab === cookbooksTab && <div>Coming soon!</div>}
+                {activeTab === recepiesTab &&
+                    <section>
+                        <Recepie />
+                        <Recepie />
+                        <Recepie />
+                    </section>
+                }
+                {activeTab === settingsTab && <Settings />}
             </main>
             <Footer />
         </div>

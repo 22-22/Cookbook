@@ -8,7 +8,7 @@ function Header() {
         <header className="header">
             <Logo />
             <nav>
-                <ul className="nav__list header__nav-list">
+                <ul className="nav-list header__nav-list">
                     <li>Recepies</li>
                     <li>Cookbook</li>
                 </ul>

@@ -80,3 +80,100 @@ export const getUserFailed = (payload: {
         payload
     }
 }
+
+export const updateEmail = (payload: {
+    email: string
+}) => {
+    return {
+        type: actionTypes.UPDATE_EMAIL,
+        payload
+    }
+};
+
+export const updateEmailSucceeded = (payload: {
+    value: string
+}) => {
+    return {
+        type: actionTypes.UPDATE_EMAIL_SUCCEEDED,
+        payload
+    }
+};
+
+export const updateEmailFailed = (payload: {
+    errorInfo: string
+}) => {
+    return {
+        type: actionTypes.UPDATE_EMAIL_FAILED,
+        payload
+    }
+};
+
+
+export const updatePassword = (payload: {
+    password: string
+}) => {
+    return {
+        type: actionTypes.UPDATE_PASSWORD,
+        payload
+    }
+};
+
+export const updatePasswordSucceeded = () => {
+    return {
+        type: actionTypes.UPDATE_PASSWORD_SUCCEEDED,
+    }
+};
+
+export const updatePasswordFailed = (payload: {
+    errorInfo: string
+}) => {
+    return {
+        type: actionTypes.UPDATE_PASSWORD_FAILED,
+        payload
+    }
+};
+
+export const createUpdateFirestoreAction = (payload: {
+    id: string, key: string, value: string
+}) => {
+    return {
+        type: actionTypes.UPDATE_FIRESTORE,
+        payload
+    }
+};
+
+export const updateFirestoreSucceeded = (payload: {
+    value: string
+}) => {
+    return {
+        type: actionTypes.UPDATE_FIRESTORE_SUCCEEDED,
+        payload
+    }
+};
+
+export const updateFirestoreFailed = (payload: {
+    errorInfo: string
+}) => {
+    return {
+        type: actionTypes.UPDATE_FIRESTORE_FAILED,
+        payload
+    }
+};
+
+export const uploadImage = (payload: {
+    id: string, file: File, folderName: string,
+}) => {
+    return {
+        type: actionTypes.UPLOAD_IMAGE,
+        payload
+    }
+};
+
+export const uploadImageFailed = (payload: {
+    errorInfo: string
+}) => {
+    return {
+        type: actionTypes.UPLOAD_IMAGE_FAILED,
+        payload
+    }
+};
