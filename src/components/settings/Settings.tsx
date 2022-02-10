@@ -4,6 +4,7 @@ import { updateEmail, updatePassword, createUpdateFirestoreAction } from "../../
 import { selectError, selectUserInfo } from "../../redux/selectors";
 import { EditSettingsBtn } from "../common/EditSettingsBtn";
 import { SaveSettingsBtn } from "../common/SaveSettingsBtn";
+import { SettingsInput } from "../common/SettingsInput";
 import './Settings.css';
 
 export const Settings = () => {
@@ -16,22 +17,12 @@ export const Settings = () => {
         email: false,
         password: false,
     });
-    // firebase не возвращает пароль, так что просто поставила точки
-    const [userData, setUserData] = useState({
+
+    const [settingsInput, setSettingsInput] = useState({
         name: "",
         email: "",
-        password: ".....",
+        password: "",
     });
-
-    useEffect(() => {
-        const { name, email } = userDataFromStore;
-        if (name) {
-            setUserData((prevState) => ({
-                ...prevState,
-                name, email
-            }));
-        }
-    }, [userDataFromStore]);
 
     const toggleEditMode = (key: string) => {
         setEditMode((prevState: any) => ({
@@ -42,39 +33,51 @@ export const Settings = () => {
 
     const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = evt.target;
-        setUserData((prevState) => ({
+        setSettingsInput((prevState) => ({
             ...prevState,
             [name]: value
         }));
     }
 
     const saveEmail = () => {
-        dispatch(updateEmail({ email: userData.email }));
+        dispatch(updateEmail({ email: settingsInput.email }));
         // попробовала так, но условие отрабатывает до того, как ошибка приходит из стора
         if (!errorInfo) {
             setEditMode((prevState) => ({
                 ...prevState,
                 email: false
             }));
+            setSettingsInput((prevState) => ({
+                ...prevState,
+                email: ""
+            }));
         }
     };
 
     const saveToFirestore = (key: string) => {
         // тут можно было бы сделать функцию чуть более универсальной и написать не
-        // userData.name, а userData[key], но мне не дает ts.
-        const payload = { id: userDataFromStore.uid, key, value: userData.name };
+        // settingsInput.name, а settingsInput[key], но мне не дает ts.
+        const payload = { id: userDataFromStore.uid, key, value: settingsInput.name };
         dispatch(createUpdateFirestoreAction(payload));
         setEditMode((prevState) => ({
             ...prevState,
             name: false
         }));
+        setSettingsInput((prevState) => ({
+            ...prevState,
+            name: ""
+        }));
     };
 
     const savePassword = () => {
-        dispatch(updatePassword({ password: userData.password }));
+        dispatch(updatePassword({ password: settingsInput.password }));
         setEditMode((prevState) => ({
             ...prevState,
             password: false
+        }));
+        setSettingsInput((prevState) => ({
+            ...prevState,
+            password: ""
         }));
     }
 
@@ -84,9 +87,12 @@ export const Settings = () => {
             <form>
                 <div className="settings-grid">
                     <label className="settings-label" htmlFor="name">Name</label>
-                    <input className={"settings-input" + (editMode.name ? " settings-input--active" : " settings-input--disabled")}
-                        type="text" id="name" name="name" value={userData.name} onChange={handleInputChange}
-                        disabled={editMode.name ? false : true} />
+                    {editMode.name ? (
+                        <SettingsInput type="text" id="name" name="name"
+                            value={settingsInput.name} handleInputChange={handleInputChange} />
+                    ) : (
+                        <p className="settings-text">{userDataFromStore.name}</p>
+                    )}
                     <EditSettingsBtn editMode={editMode.name} toggleEditMode={toggleEditMode} type="name" />
                     {editMode.name && (
                         <SaveSettingsBtn save={saveToFirestore} field="name" />
@@ -94,9 +100,12 @@ export const Settings = () => {
                 </div>
                 <div className="settings-grid">
                     <label className="settings-label" htmlFor="email">Email</label>
-                    <input className={"settings-input" + (editMode.email ? " settings-input--active" : " settings-input--disabled")}
-                        type="email" id="email" name="email" value={userData.email} onChange={handleInputChange}
-                        disabled={editMode.email ? false : true} />
+                    {editMode.email ? (
+                        <SettingsInput type="email" id="email" name="email"
+                            value={settingsInput.email} handleInputChange={handleInputChange} />
+                    ) : (
+                        <p className="settings-text">{userDataFromStore.email}</p>
+                    )}
                     <EditSettingsBtn editMode={editMode.email} toggleEditMode={toggleEditMode} type="email" />
                     {editMode.email && (
                         <SaveSettingsBtn save={saveEmail} />
@@ -104,9 +113,12 @@ export const Settings = () => {
                 </div>
                 <div className={editMode.password ? "settings-grid" : "settings-grid--longer"}>
                     <label className="settings-label" htmlFor="password">Password</label>
-                    <input className={"settings-input" + (editMode.password ? " settings-input--active" : " settings-input--disabled")}
-                        type="text" id="password" name="password" value={userData.password} onChange={handleInputChange}
-                        disabled={editMode.password ? false : true} />
+                    {editMode.password ? (
+                        <SettingsInput type="password" id="password" name="password"
+                            value={settingsInput.password} handleInputChange={handleInputChange} />
+                    ) : (
+                        <p className="settings-text"></p>
+                    )}
                     <EditSettingsBtn editMode={editMode.password} toggleEditMode={toggleEditMode} type="password" />
                     {editMode.password && (
                         <SaveSettingsBtn save={savePassword} />

@@ -35,15 +35,12 @@
     padding: 2px 4px;
     outline: 0;
     margin: 0 16px 0 0;
-}
-
-.settings-input--disabled {
-    border: 0;
-}
-
-.settings-input--active {
     border: 1px rgb(178, 178, 178) solid;
     border-radius: 3px;
+}
+
+.settings-text {
+    min-height: 31px;
 }
 
 .settings-btn {
@@ -60,4 +57,8 @@
 
 .settings-btn--grey {
     color: rgb(178, 178, 178);
+}
+
+.settings-btn--margin {
+    margin: 0 0 0 10px;
 }

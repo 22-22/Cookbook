@@ -19,6 +19,13 @@ export function setError(state: any, action: any) {
     }
 };
 
+export function removeError(state: any) {
+    return {
+        ...state,
+        errorInfo: ""
+    }
+};
+
 export function updateStateWithAllUserData(
     state: tsTypes.userDataState, action: tsTypes.setUserAction
 ) {

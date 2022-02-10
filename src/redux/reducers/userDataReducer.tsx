@@ -1,7 +1,7 @@
 import * as actionTypes from "../actionTypes";
 import {
     updateStateOnAuthSuccess, updateStateWithAllUserData,
-    updateStateWithSomeData, setError
+    updateStateWithSomeData, setError, removeError
 } from "./reducerHandlers";
 import { userDataState, setUserAction } from "../../tsTypes";
 
@@ -15,8 +15,6 @@ const initialState = {
     errorInfo: ""
 };
 
-// не вписывала изменения пароля updatePasswordSucceeded, 
-// так как он не хранится в сторе и стор не меняется
 const handlers = {
     [actionTypes.SIGN_IN_SUCCEEDED]: updateStateOnAuthSuccess,
     [actionTypes.SIGN_IN_FAILED]: setError,
@@ -28,6 +26,7 @@ const handlers = {
     [actionTypes.UPDATE_EMAIL_FAILED]: setError,
     [actionTypes.UPDATE_FIRESTORE_SUCCEEDED]: updateStateWithSomeData,
     [actionTypes.UPDATE_FIRESTORE_FAILED]: setError,
+    [actionTypes.UPDATE_PASSWORD_SUCCEEDED]: removeError,
     [actionTypes.UPDATE_PASSWORD_FAILED]: setError,
     [actionTypes.UPLOAD_IMAGE_FAILED]: setError,
 };

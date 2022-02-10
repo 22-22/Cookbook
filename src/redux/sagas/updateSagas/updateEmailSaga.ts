@@ -10,9 +10,10 @@ const call: any = Effects.call;
 
 function* updateEmailRequest(action: updateEmailAction): any {
     try {
+        const { email } = action.payload;
         const auth = getAuth();
-        yield call(updateEmail, auth.currentUser, action.payload.email);
-        yield put(updateEmailSucceeded({ value: action.payload.email }));
+        yield call(updateEmail, auth.currentUser, email);
+        yield put(updateEmailSucceeded({ key: "email", value: email }));
     } catch (error: any) {
         const payload = { errorInfo: error.code };
         yield put(updateEmailFailed(payload));

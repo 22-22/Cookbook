@@ -91,7 +91,7 @@ export const updateEmail = (payload: {
 };
 
 export const updateEmailSucceeded = (payload: {
-    value: string
+    key: string, value: string
 }) => {
     return {
         type: actionTypes.UPDATE_EMAIL_SUCCEEDED,
