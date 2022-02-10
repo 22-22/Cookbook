@@ -26,9 +26,10 @@ const handlers = {
     [actionTypes.UPDATE_EMAIL_FAILED]: setError,
     [actionTypes.UPDATE_FIRESTORE_SUCCEEDED]: updateStateWithSomeData,
     [actionTypes.UPDATE_FIRESTORE_FAILED]: setError,
-    [actionTypes.UPDATE_PASSWORD_SUCCEEDED]: removeError,
+    [actionTypes.UPDATE_PASSWORD_SUCCEEDED]: updateStateWithSomeData,
     [actionTypes.UPDATE_PASSWORD_FAILED]: setError,
     [actionTypes.UPLOAD_IMAGE_FAILED]: setError,
+    [actionTypes.REMOVE_ERROR]: removeError,
 };
 
 const userDataReducerFactory = (initialState: userDataState, handlers: any) => {

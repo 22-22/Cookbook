@@ -10,21 +10,37 @@ import './Settings.css';
 export const Settings = () => {
     const dispatch = useDispatch();
     const userDataFromStore = useSelector(selectUserInfo);
-    const errorInfo = useSelector(selectError);
-
     const [editMode, setEditMode] = useState({
         name: false,
         email: false,
         password: false,
     });
-
     const [settingsInput, setSettingsInput] = useState({
         name: "",
         email: "",
         password: "",
     });
+    const [attemptToSave, setAttemptToSave] = useState("");
+
+    useEffect(() => {
+        setEditMode((prevState) => ({
+            ...prevState,
+            [attemptToSave]: false
+        }));
+        setSettingsInput((prevState) => ({
+            ...prevState,
+            [attemptToSave]: ""
+        }));
+        setAttemptToSave("");
+    }, [userDataFromStore]);
 
     const toggleEditMode = (key: string) => {
+        if (editMode) {
+            setSettingsInput((prevState) => ({
+                ...prevState,
+                [key]: ""
+            }));
+        }
         setEditMode((prevState: any) => ({
             ...prevState,
             [key]: !prevState[key]
@@ -41,44 +57,18 @@ export const Settings = () => {
 
     const saveEmail = () => {
         dispatch(updateEmail({ email: settingsInput.email }));
-        // попробовала так, но условие отрабатывает до того, как ошибка приходит из стора
-        if (!errorInfo) {
-            setEditMode((prevState) => ({
-                ...prevState,
-                email: false
-            }));
-            setSettingsInput((prevState) => ({
-                ...prevState,
-                email: ""
-            }));
-        }
+        setAttemptToSave("email");
     };
 
-    const saveToFirestore = (key: string) => {
-        // тут можно было бы сделать функцию чуть более универсальной и написать не
-        // settingsInput.name, а settingsInput[key], но мне не дает ts.
-        const payload = { id: userDataFromStore.uid, key, value: settingsInput.name };
+    const saveName = () => {
+        const payload = { id: userDataFromStore.uid, key: "name", value: settingsInput.name };
         dispatch(createUpdateFirestoreAction(payload));
-        setEditMode((prevState) => ({
-            ...prevState,
-            name: false
-        }));
-        setSettingsInput((prevState) => ({
-            ...prevState,
-            name: ""
-        }));
+        setAttemptToSave("name");
     };
 
     const savePassword = () => {
         dispatch(updatePassword({ password: settingsInput.password }));
-        setEditMode((prevState) => ({
-            ...prevState,
-            password: false
-        }));
-        setSettingsInput((prevState) => ({
-            ...prevState,
-            password: ""
-        }));
+        setAttemptToSave("password");
     }
 
     return (
@@ -95,7 +85,7 @@ export const Settings = () => {
                     )}
                     <EditSettingsBtn editMode={editMode.name} toggleEditMode={toggleEditMode} type="name" />
                     {editMode.name && (
-                        <SaveSettingsBtn save={saveToFirestore} field="name" />
+                        <SaveSettingsBtn save={saveName} />
                     )}
                 </div>
                 <div className="settings-grid">
@@ -117,7 +107,7 @@ export const Settings = () => {
                         <SettingsInput type="password" id="password" name="password"
                             value={settingsInput.password} handleInputChange={handleInputChange} />
                     ) : (
-                        <p className="settings-text"></p>
+                        <p className="settings-text">{userDataFromStore.password}</p>
                     )}
                     <EditSettingsBtn editMode={editMode.password} toggleEditMode={toggleEditMode} type="password" />
                     {editMode.password && (

@@ -118,9 +118,12 @@ export const updatePassword = (payload: {
     }
 };
 
-export const updatePasswordSucceeded = () => {
+export const updatePasswordSucceeded = (payload: {
+    key: string, value: string
+}) => {
     return {
         type: actionTypes.UPDATE_PASSWORD_SUCCEEDED,
+        payload
     }
 };
 
@@ -177,3 +180,9 @@ export const uploadImageFailed = (payload: {
         payload
     }
 };
+
+export const createRemoveErrorAction = () => {
+    return {
+        type: actionTypes.REMOVE_ERROR
+    }
+}

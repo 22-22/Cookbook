@@ -9,9 +9,10 @@ const call: any = Effects.call;
 
 function* updatePasswordRequest(action: updatePasswordAction): any {
     try {
+        const { password } = action.payload;
         const auth = getAuth();
-        yield call(updatePassword, auth.currentUser, action.payload.password);
-        yield put(updatePasswordSucceeded());
+        yield call(updatePassword, auth.currentUser, password);
+        yield put(updatePasswordSucceeded({ key: "password", value: password }));
     } catch (error: any) {
         const payload = { errorInfo: error.code };
         yield put(updatePasswordFailed(payload));

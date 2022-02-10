@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserInfo } from "../../redux/selectors";
 import { uploadImage } from "../../redux/actionCreators";
@@ -14,6 +14,10 @@ export const EditAvatarForm = () => {
     const [avatar, setAvatar] = useState("");
     const [inputFile, setInputFile] = useState<File>();
 
+    useEffect(() => {
+        setEditMode(false);
+    }, [userDataFromStore.avatar]);
+
     const handleInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
         if (evt.target.files) {
             const file = evt.target.files[0];
@@ -27,7 +31,6 @@ export const EditAvatarForm = () => {
         if (inputFile) {
             const payload = { id: userDataFromStore.uid, file: inputFile, folderName: "avatars" };
             dispatch(uploadImage(payload));
-            setEditMode(false);
         }
     }
 
