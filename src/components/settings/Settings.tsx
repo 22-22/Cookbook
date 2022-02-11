@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateEmail, updatePassword, createUpdateFirestoreAction } from "../../redux/actionCreators";
-import { selectError, selectUserInfo } from "../../redux/selectors";
+import { selectUserInfo } from "../../redux/selectors";
+import { usePrevious } from "../../utils/customHooks";
 import { EditSettingsBtn } from "../common/EditSettingsBtn";
 import { SaveSettingsBtn } from "../common/SaveSettingsBtn";
 import { SettingsInput } from "../common/SettingsInput";
@@ -20,18 +21,23 @@ export const Settings = () => {
         email: "",
         password: "",
     });
-    const [attemptToSave, setAttemptToSave] = useState("");
+    const prevUserData = usePrevious(userDataFromStore);
 
     useEffect(() => {
-        setEditMode((prevState) => ({
-            ...prevState,
-            [attemptToSave]: false
-        }));
-        setSettingsInput((prevState) => ({
-            ...prevState,
-            [attemptToSave]: ""
-        }));
-        setAttemptToSave("");
+        if (prevUserData) {
+            const editedKey = Object.keys(settingsInput)
+                .find((key) => userDataFromStore[key] !== prevUserData[key]);
+            if (editedKey) {
+                setEditMode((prevState) => ({
+                    ...prevState,
+                    [editedKey]: false
+                }));
+                setSettingsInput((prevState) => ({
+                    ...prevState,
+                    [editedKey]: ""
+                }));
+            }
+        }
     }, [userDataFromStore]);
 
     const toggleEditMode = (key: string) => {
@@ -57,18 +63,15 @@ export const Settings = () => {
 
     const saveEmail = () => {
         dispatch(updateEmail({ email: settingsInput.email }));
-        setAttemptToSave("email");
     };
 
     const saveName = () => {
         const payload = { id: userDataFromStore.uid, key: "name", value: settingsInput.name };
         dispatch(createUpdateFirestoreAction(payload));
-        setAttemptToSave("name");
     };
 
     const savePassword = () => {
         dispatch(updatePassword({ password: settingsInput.password }));
-        setAttemptToSave("password");
     }
 
     return (
