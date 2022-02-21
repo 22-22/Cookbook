@@ -1,67 +1,57 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { DocumentData } from "firebase/firestore"
 import { useDispatch, useSelector } from "react-redux";
 import { getUserFromDB } from "../redux/actionCreators";
 import { selectError, selectUserInfo } from "../redux/selectors";
+import { cookbooksTab, recepiesTab, settingsTab } from "../constants";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import { Recepie } from "../components/recepie/Recepie";
 import { ErrorInfo } from "../components/common/ErrorInfo";
+import { Settings } from "../components/settings/Settings";
+import { EditAvatarForm } from "../components/editAvatarForm/EditAvatarForm";
+import { ProfileNavigation } from "../components/profileNavigation/ProfileNavigation";
 import "./ProfilePage.css";
 
 function ProfilePage() {
     const dispatch = useDispatch();
-    const userDataFromDB = useSelector(selectUserInfo);
+    const userDataFromStore = useSelector(selectUserInfo);
     const errorInfo = useSelector(selectError);
-    const [userData, setUserData] = useState<DocumentData>({});
+    const [activeTab, setActiveTab] = useState(settingsTab);
 
     useEffect(() => {
-        dispatch(getUserFromDB({ id: userDataFromDB.uid }));
+        dispatch(getUserFromDB({ id: userDataFromStore.uid }));
     }, []);
-
-    useEffect(() => {
-        setUserData(userDataFromDB);
-    }, [userDataFromDB]);
 
     return (
         <div>
             <Header />
-            <main className="home-page">
-                {
-                    errorInfo ? (
-                        <ErrorInfo errorInfo={errorInfo} />
-                    ) : (
-                        <section className="personal-info">
-                            <img src={userData.avatar} alt="avatar" />
-                            <div>
-                                <h1>{userData.name}</h1>
-                                <p>{userData.details} </p>
-                            </div>
-                        </section>
-                    )
-                }
+            <main className="profile-page">
+                <section className="personal-info">
+                    {activeTab === settingsTab
+                        ? <EditAvatarForm />
+                        : <img className="avatar" src={userDataFromStore.avatar} alt="avatar" />
+                    }
+                    <div className="personal-info__text-block">
+                        <h1>{userDataFromStore.name}</h1>
+                        <p>{userDataFromStore.details} </p>
+                    </div>
+                </section>
                 <section className="profile__nav-block">
-                    <nav>
-                        <ul className="nav__list profile__nav-list">
-                            <li>
-                                <Link to="">My Cookbooks</Link>
-                            </li>
-                            <li>
-                                <Link to="">My Recepies</Link>
-                            </li>
-                            <li>
-                                <Link to="">My Settings</Link>
-                            </li>
-                        </ul>
-                    </nav>
+                    <ProfileNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
                     <button className="main-btn create-recepie-btn">Create New Recepie</button>
                 </section>
-                <section>
-                    <Recepie />
-                    <Recepie />
-                    <Recepie />
-                </section>
+                {errorInfo && (
+                    <ErrorInfo errorInfo={errorInfo} />
+                )}
+                {activeTab === cookbooksTab && <div>Coming soon!</div>}
+                {activeTab === recepiesTab &&
+                    <section>
+                        <Recepie />
+                        <Recepie />
+                        <Recepie />
+                    </section>
+                }
+                {activeTab === settingsTab && <Settings />}
             </main>
             <Footer />
         </div>

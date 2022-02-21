@@ -1,4 +1,4 @@
-.nav__list {
+.nav-list {
   display: flex;
   align-items: center;
   list-style-type: none;
@@ -18,8 +18,10 @@
 }
 
 .error-info {
+  margin: 5px 0;
   font-family: 'Nunito', sans-serif;
   font-size: 20px;
   font-weight: 400;
+  text-align: center;
   color: #ff0000;
 }

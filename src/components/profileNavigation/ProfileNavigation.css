@@ -1,0 +1,25 @@
+.profile__nav-list li:not(:last-child) {
+    margin: 0 32px 0 0;
+}
+
+.profile__nav-btn {
+    padding: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    text-decoration: none;
+    color: var(--text-main);
+    background-color: #fff;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+.profile__nav-btn:hover {
+    color: var(--primary-yellow);
+}
+
+.profile__nav-btn--active {
+    border-bottom: 2px solid var(--primary-yellow);
+}

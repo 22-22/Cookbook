@@ -8,7 +8,7 @@ function Footer() {
         <footer className="footer">
             <Logo />
             <nav>
-                <ul className="nav__list footer__nav-list">
+                <ul className="nav-list footer__nav-list">
                     <li>Recepies</li>
                     <li>Cookbook</li>
                     <li>About Us</li>
