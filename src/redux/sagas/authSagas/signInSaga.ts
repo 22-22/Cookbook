@@ -1,8 +1,11 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import * as actionTypes from "../../actionTypes";
+import * as actionTypes from "../../actionTypes/userActionTypes";
 import { signActionInterface } from "../../../tsTypes";
-import { handleSignInSucceeded, handleSignInFailed } from "../../actionCreators";
+import {
+    handleSignInSucceeded,
+    handleSignInFailed
+} from "../../actionCreators/userActionCreators";
 
 function* signIn(action: signActionInterface): any {
     try {

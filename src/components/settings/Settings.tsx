@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateEmail, updatePassword, createUpdateFirestoreAction } from "../../redux/actionCreators";
-import { selectUserInfo } from "../../redux/selectors";
+import { updateEmail, updatePassword } from "../../redux/actionCreators/userActionCreators";
+import { createUpdateFirestoreAction } from "../../redux/actionCreators/commonActionCreators";
+import { selectUserInfo } from "../../redux/selectors/userSelectors";
 import { usePrevious } from "../../utils/customHooks";
 import { EditSettingsBtn } from "../common/EditSettingsBtn";
 import { SaveSettingsBtn } from "../common/SaveSettingsBtn";

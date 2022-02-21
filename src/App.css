@@ -17,6 +17,23 @@
   cursor: pointer;
 }
 
+.outlined-btn {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  color: var(--primary-yellow);
+  background-color: transparent;
+  border: 2px solid var(--primary-yellow);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn--disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+
 .error-info {
   margin: 5px 0;
   font-family: 'Nunito', sans-serif;

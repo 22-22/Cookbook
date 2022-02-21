@@ -1,8 +1,8 @@
 import { getAuth, updateEmail } from "firebase/auth";
 import { put, takeLatest } from "redux-saga/effects";
 import * as Effects from "redux-saga/effects";
-import * as actionTypes from "../../actionTypes";
-import { updateEmailSucceeded, updateEmailFailed } from "../../actionCreators";
+import * as actionTypes from "../../actionTypes/userActionTypes";
+import { updateEmailSucceeded, updateEmailFailed } from "../../actionCreators/userActionCreators";
 import { updateEmailAction } from "../../../tsTypes";
 
 // call сработал только так, не понимаю, почему

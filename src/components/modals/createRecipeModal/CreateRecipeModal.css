@@ -1,0 +1,119 @@
+.recipe-modal .MuiPaper-root {
+    min-width: 50%;
+    padding: 72px 56px 62px;
+    box-shadow: var(--shadow-popup);
+    border-radius: 10px;
+}
+
+.recipe-modal__title {
+    margin: 0 0 40px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
+    color: var(--text-main);
+}
+
+.recipe-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe-form__label, #select-label {
+    margin: 0 0 14px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--text-main);
+}
+
+.recipe-form__label--title::after {
+    content: '*';
+    color: var(--primary-yellow);
+}
+
+.recipe-form__label--recipeImg {
+    max-width: 271px;
+    margin: 24px 0 40px;
+    padding: 16px 32px;
+    text-align: center;
+}
+
+.recipe-form__img-block {
+    display: flex;
+    align-items: center;
+}
+
+.img-block__image {
+    max-width: 150px;
+    max-height: 100px;
+    margin: 0 0 0 50px;
+}
+
+.recipe-form__input--upload {
+    display: none;
+}
+
+.recipe-form__input {
+    height: 40px;
+    padding: 2px 8px;
+    border: 1px solid var(--background-grey);
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+}
+
+.recipe-form__input::placeholder {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    line-height: 19px;
+    color: var(--background-grey);
+}
+
+.recipe-form__textarea {
+    height: 104px;
+    margin: 0 0 40px 0;
+    padding: 5px 8px;
+    resize: none;
+}
+
+.recipe-form__select {
+    margin: 0 0 48px 0;
+}
+
+.recipe-form__options-view-block {
+    margin: 0 0 40px;
+}
+
+.recipe-form__options-view {
+    margin-bottom: 15px;
+}
+
+.recipe-form__options-view span {
+    display: inline-block;
+    min-width: 200px;
+    max-width: 200px;
+}
+
+.recipe-form__btn-block {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0 10px 0;
+}
+
+.recipe-form__btn {
+    padding: 16px 32px;
+    margin-top: 16px;
+}
+
+.recipe-form__btn:first-child {
+    margin-right: 40px;
+}
+
+.recipe-form__delete-btn {
+    margin: 0 0 0 50px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}

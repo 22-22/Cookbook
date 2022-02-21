@@ -1,9 +1,9 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { getDoc, doc } from "firebase/firestore"
 import { firestoreDB } from "../../index";
-import * as types from "../actionTypes";
+import * as types from "../actionTypes/userActionTypes";
 import { getUserAction } from "../../tsTypes";
-import { getUserSucceeded, getUserFailed } from "../actionCreators";
+import { getUserSucceeded, getUserFailed } from "../actionCreators/userActionCreators";
 
 function* getUser(action: getUserAction): any {
     try {

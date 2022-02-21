@@ -1,5 +1,5 @@
-import * as tsTypes from "../../tsTypes";
-import defaultAvatar from "../../assets/default-avatar.jpg"
+import * as tsTypes from "../../../tsTypes";
+import defaultAvatar from "../../../assets/default-avatar.jpg"
 
 export function updateStateOnAuthSuccess(
     state: tsTypes.userDataState, action: tsTypes.setUserAction
@@ -8,20 +8,6 @@ export function updateStateOnAuthSuccess(
         ...state,
         userInfo: action.payload.userInfo,
         isAuthenticated: true,
-        errorInfo: ""
-    }
-};
-
-export function setError(state: any, action: any) {
-    return {
-        ...state,
-        errorInfo: action.payload.errorInfo
-    }
-};
-
-export function removeError(state: any) {
-    return {
-        ...state,
         errorInfo: ""
     }
 };

@@ -1,8 +1,8 @@
 import { getAuth, updatePassword } from "firebase/auth";
 import { put, takeLatest } from "redux-saga/effects";
 import * as Effects from "redux-saga/effects";
-import * as actionTypes from "../../actionTypes";
-import { updatePasswordSucceeded, updatePasswordFailed } from "../../actionCreators";
+import * as actionTypes from "../../actionTypes/userActionTypes";
+import { updatePasswordSucceeded, updatePasswordFailed } from "../../actionCreators/userActionCreators";
 import { updatePasswordAction } from "../../../tsTypes";
 
 const call: any = Effects.call;

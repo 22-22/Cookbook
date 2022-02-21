@@ -5,18 +5,15 @@ export interface signActionInterface {
         password: string,
     }
 };
-
 export interface SignUpValues {
     email: string;
     password: string;
     confirmedPassword: string;
 };
-
 export interface SignInValues {
     email: string,
     password: string,
 };
-
 export interface getUserAction {
     type: string,
     payload: {
@@ -29,14 +26,12 @@ export interface updateEmailAction {
         email: string,
     }
 };
-
 export interface updatePasswordAction {
     type: string,
     payload: {
         password: string,
     }
 };
-
 export interface IUpdateFirestoreAction {
     type: string,
     payload: {
@@ -45,7 +40,6 @@ export interface IUpdateFirestoreAction {
         value: string,
     }
 };
-
 export interface IUploadImageAction {
     type: string,
     payload: {
@@ -54,7 +48,6 @@ export interface IUploadImageAction {
         folderName: string
     }
 };
-
 export interface setUserAction {
     type: string,
     payload: {
@@ -66,7 +59,6 @@ export interface setUserAction {
         errorInfo: string
     }
 };
-
 export interface setSomeUserData {
     type: string,
     payload: {
@@ -74,13 +66,51 @@ export interface setSomeUserData {
         value: string
     }
 };
-
 export interface userDataState {
-    isAuthenticated: Boolean,
+    isAuthenticated: boolean,
     userInfo: {
         name: string,
         email: string,
         avatar: string,
     },
     errorInfo: string,
+};
+export interface ICreateRecipePayload {
+    id: string,
+    data: object
+    file?: File
+    collectName: string,
+    subcollectName: string,
+};
+export interface ICreateRecipeAction {
+    type: string,
+    payload: ICreateRecipePayload
+};
+
+export interface ICreateRecipeSuccessAction {
+    type: string,
+    payload: {
+        data: object
+    }
+};
+export interface IAddDocPayload {
+    id: string,
+    data: object
+    collectName: string,
+    subcollectName: string,
+}
+export interface IAddDocAction {
+    type: string,
+    payload: IAddDocPayload
+};
+export interface IRecipeState {
+    isCreateRecipeModalOpen: boolean,
+    recipeData: Array<object>,
+    errorInfo: string
+};
+export interface ISetErrorAction {
+    type: string,
+    payload: {
+        errorInfo: string
+    }
 };
