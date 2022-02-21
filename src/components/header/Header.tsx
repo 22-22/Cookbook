@@ -18,7 +18,7 @@ function Header() {
                 <input className="search__input" type="text" name="searchInput" />
             </div>
             <div>
-                <button className="create-book-btn">Create CookBook</button>
+                <button className="outlined-btn create-book-btn">Create CookBook</button>
                 <span className="user">John Doe</span>
             </div>
         </header>

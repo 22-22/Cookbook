@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserInfo } from "../../redux/selectors";
-import { uploadImage } from "../../redux/actionCreators";
+import { selectUserInfo } from "../../redux/selectors/userSelectors";
+import { createUpdateImageAction } from "../../redux/actionCreators/userActionCreators";
 import { EditSettingsBtn } from "../common/EditSettingsBtn";
 import cameraIcon from "../../assets/icons/camera.png";
 import "./EditAvatarForm.css";
@@ -30,14 +30,14 @@ export const EditAvatarForm = () => {
         evt.preventDefault();
         if (inputFile) {
             const payload = { id: userDataFromStore.uid, file: inputFile, folderName: "avatars" };
-            dispatch(uploadImage(payload));
+            dispatch(createUpdateImageAction(payload));
         }
-    }
+    };
 
     const toggleEditMode = () => {
         setEditMode(!editMode);
         setAvatar(userDataFromStore.avatar);
-    }
+    };
     return (
         <form className="avatar-form" method="post" encType="multipart/form-data" onSubmit={saveAvatar}>
             <div className="avatar-block">

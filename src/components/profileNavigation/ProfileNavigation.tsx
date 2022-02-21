@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { cookbooksTab, recepiesTab, settingsTab } from "../../constants";
-import { createRemoveErrorAction } from "../../redux/actionCreators";
-import { selectError } from "../../redux/selectors";
+import { createRemoveErrorAction } from "../../redux/actionCreators/commonActionCreators";
+import { selectError } from "../../redux/selectors/userSelectors";
 import "./ProfileNavigation.css";
 
 interface ProfileNavigationProps {

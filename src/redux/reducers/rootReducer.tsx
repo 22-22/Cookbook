@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import { userDataReducer } from "./userDataReducer";
+import { userDataReducer } from "./userDataReducer/userDataReducer";
+import { recipeReducer } from "./recipeReducer/recipeReducer";
 
 export default combineReducers({
-    user: userDataReducer
+    user: userDataReducer,
+    recipe: recipeReducer
 })

@@ -15,8 +15,9 @@ body {
 
 :root {
   --primary-yellow: #FFBC01;
+  --background-grey: #DADADA;
   --text-main: #181818;
   --text-secondary: #494949;
   --shadow-main: 0px 0px 16px rgba(0, 0, 0, 0.08);
+  --shadow-popup: 0px 18px 60px rgba(24, 24, 24, 0.7);
 }
-

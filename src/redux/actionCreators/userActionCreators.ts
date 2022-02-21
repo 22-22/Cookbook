@@ -1,4 +1,4 @@
-import * as actionTypes from "./actionTypes";
+import * as actionTypes from "../actionTypes/userActionTypes";
 
 export const signInUser = (payload: {
     email: string, password: string
@@ -136,53 +136,26 @@ export const updatePasswordFailed = (payload: {
     }
 };
 
-export const createUpdateFirestoreAction = (payload: {
-    id: string, key: string, value: string
-}) => {
-    return {
-        type: actionTypes.UPDATE_FIRESTORE,
-        payload
-    }
-};
-
-export const updateFirestoreSucceeded = (payload: {
-    value: string
-}) => {
-    return {
-        type: actionTypes.UPDATE_FIRESTORE_SUCCEEDED,
-        payload
-    }
-};
-
-export const updateFirestoreFailed = (payload: {
-    errorInfo: string
-}) => {
-    return {
-        type: actionTypes.UPDATE_FIRESTORE_FAILED,
-        payload
-    }
-};
-
-export const uploadImage = (payload: {
+export const createUpdateImageAction = (payload: {
     id: string, file: File, folderName: string,
 }) => {
     return {
-        type: actionTypes.UPLOAD_IMAGE,
+        type: actionTypes.UPDATE_IMAGE,
         payload
     }
 };
 
-export const uploadImageFailed = (payload: {
+export const updateImageSucceeded = () => {
+    return {
+        type: actionTypes.UPDATE_IMAGE_SUCCEEDED
+    }
+};
+
+export const updateImageFailed = (payload: {
     errorInfo: string
 }) => {
     return {
-        type: actionTypes.UPLOAD_IMAGE_FAILED,
+        type: actionTypes.UPDATE_IMAGE_FAILED,
         payload
     }
 };
-
-export const createRemoveErrorAction = () => {
-    return {
-        type: actionTypes.REMOVE_ERROR
-    }
-}
